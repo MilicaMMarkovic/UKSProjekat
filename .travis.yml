@@ -1,12 +1,12 @@
-sudo: required
+# sudo: required
 language: python
 python:
 - 3.5.2
 
-addons:
-  apt:
-    packages:
-    - sshpass
+# addons:
+  # apt:
+   # packages:
+    # - sshpass
 services:
   - docker
 branches:
