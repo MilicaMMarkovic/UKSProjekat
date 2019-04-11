@@ -1,0 +1,23 @@
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media
+
+### Postgres ###
+database
+
+### Docker ###
+*.env
+
+### Deployment ###
+deploy
+deploy_key
+*.tar
+
+### VisualStudioCode ###
+.vscode/*
+.history
