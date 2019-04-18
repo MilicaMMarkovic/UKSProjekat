@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
 from .managers import ProjectManager
+from enum import Enum
 
 # Create your models here.
 
@@ -45,19 +46,18 @@ class Milestone(models.Model):
         #return reverse('projekat:milestone_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return "Milestone: %s (%s)" % (self.title, self.project.name)
+        return "Milestone: %s (%s)" % (self.title, self.project.title)
 
 
 class Label(models.Model):
-    name = models.CharField(max_length=50)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+   name = models.CharField(max_length=50)
+   project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     #def get_absolute_url(self):
      #   return reverse('projekat:label_detail', kwargs={'pk': self.pk})
 
-    def __str__(self):
-        return "Label: "+self.name
-
+   def __str__(self):
+       return "Label: "+self.name
 
 class Issue(models.Model):
     title=models.CharField(max_length=150)
@@ -65,7 +65,7 @@ class Issue(models.Model):
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='author')
     assignees = models.ManyToManyField(User, related_name='assignees')
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE)
-    labels = models.ManyToManyField(to=Label)
+    label = models.ManyToManyField(to=Label)
     milestone = models.ForeignKey(to=Milestone, null=True, on_delete = models.SET_NULL)
 
     #def get_absolute_url(self):

@@ -1,0 +1,6 @@
+Django
+django-guardian
+django-registration-redux
+django-crispy-forms
+psycopg2
+pytz
