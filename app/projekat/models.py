@@ -1,8 +1,8 @@
-from django.db import models
-from django.contrib import admin
 from django.contrib.auth.models import User
+from django.db import models
+
 from .managers import ProjectManager
-from enum import Enum
+
 
 # Create your models here.
 
@@ -10,68 +10,67 @@ def default_user():
     try:
         return User.objects.get(username="MilicaMM")
     except:
-        return User.objects.create_user(username="MilicaMM",email="milicamarkovic94@yahoo.com", password="Milicica")
+        return User.objects.create_user(username="MilicaMM", email="milicamarkovic94@yahoo.com", password="Milicica")
 
 
 class Project(models.Model):
-
-    owner=models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="owned_projects", blank=False)
-    members=models.ManyToManyField(to=User, related_name="member_of_projects")
-    title=models.CharField(max_length=150)
+    owner = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name="owned_projects", blank=False)
+    members = models.ManyToManyField(to=User, related_name="member_of_projects")
+    title = models.CharField(max_length=150)
     description = models.TextField(max_length=250)
     date_created = models.DateField('Date created', auto_now_add=True)
 
-    objects=ProjectManager()
+    objects = ProjectManager()
 
     class Meta:
         unique_together = (("owner", "title"),)
 
-    #def get_absolute_url(self):
-     #   return reverse('projekat:projekat_detail', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #   return reverse('projekat:projekat_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "%s (%s)" % (self.title, self.owner)
 
+
 class Milestone(models.Model):
-    project=models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name="milestones", blank=False)
-    title=models.CharField(max_length=150)
+    project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name="milestones", blank=False)
+    title = models.CharField(max_length=150)
     description = models.TextField(max_length=250)
     start_date = models.DateField('Date created', auto_now_add=True)
     due_date = models.DateField('Due date')
 
     class Meta:
-        unique_together=(("project", "title"),)
-    
-    #def get_absolute_url(self):
-        #return reverse('projekat:milestone_detail', kwargs={'pk': self.pk})
+        unique_together = (("project", "title"),)
+
+    # def get_absolute_url(self):
+    # return reverse('projekat:milestone_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Milestone: %s (%s)" % (self.title, self.project.title)
 
 
 class Label(models.Model):
-   name = models.CharField(max_length=50)
-   project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-    #def get_absolute_url(self):
-     #   return reverse('projekat:label_detail', kwargs={'pk': self.pk})
+    # def get_absolute_url(self):
+    #   return reverse('projekat:label_detail', kwargs={'pk': self.pk})
 
-   def __str__(self):
-       return "Label: "+self.name
+    def __str__(self):
+        return "Label: " + self.name
+
 
 class Issue(models.Model):
-    title=models.CharField(max_length=150)
+    title = models.CharField(max_length=150)
     description = models.CharField(max_length=250)
     author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='author')
     assignees = models.ManyToManyField(User, related_name='assignees')
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE)
     label = models.ManyToManyField(to=Label)
-    milestone = models.ForeignKey(to=Milestone, null=True, on_delete = models.SET_NULL)
+    milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL)
 
-    #def get_absolute_url(self):
+    # def get_absolute_url(self):
     #    return reverse('projekat:issue_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Issue: %s (%s)" % (self.title, self.description)
-
-
