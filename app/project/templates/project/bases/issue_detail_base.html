@@ -1,0 +1,19 @@
+<div style="overflow-wrap: break-word;">
+    <b>Title:</b> <a href="{% url 'project:issue_detail' issue.id %}">
+        {{ issue.title }}
+    </a>
+</div>
+<div class="">
+    <b>Description:</b> {{ issue.description }}
+</div>
+<!--<div>-->
+<!--    <b>Date due:</b> {{ issue.due_date }}-->
+<!--</div>-->
+<div class="btn-group btn-group-sm" role="group">
+    <a href="{% url 'project:issue_update' issue.id %}" class="btn btn-warning" role="button">
+        Update
+    </a>
+    <a href="{% url 'project:issue_delete' issue.id %}" class="btn btn-danger" role="button">
+        Delete
+    </a>
+</div>

@@ -1,0 +1,13 @@
+<div style="overflow-wrap: break-word;">
+    <b>Title:</b> <a href="{% url 'project:label_detail' label.id %}">
+        {{ label.name }}
+    </a>
+</div>
+<div class="btn-group btn-group-sm" role="group">
+    <a href="{% url 'project:label_update' label.id %}" class="btn btn-warning" role="button">
+        Update
+    </a>
+    <a href="{% url 'project:label_delete' label.id %}" class="btn btn-danger" role="button">
+        Delete
+    </a>
+</div>

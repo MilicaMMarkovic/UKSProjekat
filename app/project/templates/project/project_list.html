@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1 class="text-center p-2">Učešće u sledećim projektima:</h1>
+    <div class="d-table mx-auto justify-content-center">
+        {% for project in project_list %}
+            <hr> 
+                <a href="{{ project.get_absolute_url }}"> {{ project }} </a>
+            </hr>
+        {% empty %}
+            <hr>Nema projekata trenutno.</hr>
+        {% endfor %}
+    </div>
+{% endblock %}
