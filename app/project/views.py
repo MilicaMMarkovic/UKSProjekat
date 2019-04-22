@@ -164,6 +164,34 @@ class MilestoneCreateView(PermissionRequiredMixin, CreateView):
         return Project.objects.get(pk=self.kwargs['pk'])
 
 
+class MilestoneUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Milestone
+    form_class = MilestoneForm
+    template_name_suffix = '_update_form'
+    context_object_name = 'milestone'
+    permission_required = 'change_milestone'
+
+
+class MilestoneDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+    model = Milestone
+    context_object_name = 'milestone'
+    permission_required = 'delete_milestone'
+
+    def get_success_url(self):
+        return reverse_lazy('project:project_detail', kwargs={'pk': self.get_object().project.id})
+
+
+class MilestoneListView(ListView):
+    model = Milestone
+    context_object_name = 'milestone_list'
+    queryset = Project.objects.all()
+
+
+class MilestoneDetailView(DetailView):
+    model = Milestone
+    context_object_name = 'milestone'
+
+
 class IssueCreateView(PermissionRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
@@ -181,6 +209,34 @@ class IssueCreateView(PermissionRequiredMixin, CreateView):
 
     def get_permission_object(self):
         return Project.objects.get(pk=self.kwargs['pk'])
+
+
+class IssueUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Issue
+    form_class = IssueForm
+    template_name_suffix = '_update_form'
+    context_object_name = 'issue'
+    permission_required = 'change_issue'
+
+
+class IssueDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+    model = Issue
+    context_object_name = 'issue'
+    permission_required = 'delete_issue'
+
+    def get_success_url(self):
+        return reverse_lazy('project:project_detail', kwargs={'pk': self.get_object().project.id})
+
+
+class IssueListView(ListView):
+    model = Issue
+    context_object_name = 'issue_list'
+    queryset = Project.objects.all()
+
+
+class IssueDetailView(DetailView):
+    model = Issue
+    context_object_name = 'issue'
 
 
 class LabelCreateView(PermissionRequiredMixin, CreateView):

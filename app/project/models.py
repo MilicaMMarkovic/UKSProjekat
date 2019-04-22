@@ -64,14 +64,13 @@ class Label(models.Model):
 class Issue(models.Model):
     title = models.CharField(max_length=150)
     description = models.CharField(max_length=250)
-    author = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='author')
     assignees = models.ManyToManyField(User, related_name='assignees')
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE)
     label = models.ManyToManyField(to=Label)
     milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL)
 
-    # def get_absolute_url(self):
-    #    return reverse('project:issue_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+       return reverse('project:issue_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Issue: %s (%s)" % (self.title, self.description)

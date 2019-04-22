@@ -65,21 +65,21 @@
     <div class="d-flex">
         <div class="px-4">
             <h3 class="p-2">Milestones:</h3>
-            <!--            <div>-->
-            <!--                {% for milestone in project.milestones.all %}-->
-            <!--                <hr>-->
-            <!--                {% include "project/bases/milestone_detail_base.html" %}-->
-            <!--                </hr>-->
-            <!--                {% endfor %}-->
-            <!--            </div>-->
+            <div>
+                {% for milestone in project.milestones.all %}
+                <hr>
+                {% include "project/bases/milestone_detail_base.html" %}
+                </hr>
+                {% endfor %}
+            </div>
         </div>
         <div class="px-4">
-            <h3 class="p-2">Versions: </h3>
-            <!--            {% for issue in project.issues.all %}-->
-            <!--            <hr>-->
-            <!--            {% include "project/bases/issue_detail_base.html" %}-->
-            <!--            </hr>-->
-            <!--            {% endfor %}-->
+            <h3 class="p-2">Issues: </h3>
+            {% for issue in project.issues.all %}
+            <hr>
+            {% include "project/bases/issue_detail_base.html" %}
+            </hr>
+            {% endfor %}
         </div>
         <div class="px-4">
             <h3 class="p-2">Labels: </h3>
