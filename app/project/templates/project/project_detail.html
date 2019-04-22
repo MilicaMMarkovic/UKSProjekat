@@ -75,11 +75,12 @@
         </div>
         <div class="px-4">
             <h3 class="p-2">Issues: </h3>
-            <!--            {% for issue in project.issues.all %}-->
-            <!--            <hr>-->
-            <!--            {% include "project/bases/issue_detail_base.html" %}-->
-            <!--            </hr>-->
-            <!--            {% endfor %}-->
+            {% for issue in project.issues.all %}
+            <hr>
+            {% include "project/bases/issue_detail_base.html" %}
+            </hr>
+            {% endfor %}
+
         </div>
         <div class="px-4">
             <h3 class="p-2">Labels: </h3>

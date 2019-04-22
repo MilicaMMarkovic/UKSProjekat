@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="d-flex offset-3 p-2">
+    <a href="{{ issue.project.get_absolute_url }}">
+        Nazad
+    </a>
+</div>
+<div class="d-table mx-auto justify-content-center">
+    <h3>Issue details:</h3>
+    {% include "project/bases/issue_detail_base.html" %}
+</div>
+{% endblock content %}

@@ -16,9 +16,9 @@ urlpatterns = [
     path('milestone/<pk>/delete', views.MilestoneDeleteView.as_view(), name='milestone_delete'),
 
     path('<pk>/add_issue', views.IssueCreateView.as_view(), name='issue_add'),
-    # path('issue/<pk>', views.IssueDetailView.as_view(), name='issue_detail'),
-    # path('issue/<pk>/update', views.IssueUpdateView.as_view(), name='issue_update'),
-    # path('issue/<pk>/delete', views.IssueDeleteView.as_view(), name='issue_delete'),
+    path('issue/<pk>', views.IssueDetailView.as_view(), name='issue_detail'),
+    path('issue/<pk>/update', views.IssueUpdateView.as_view(), name='issue_update'),
+    path('issue/<pk>/delete', views.IssueDeleteView.as_view(), name='issue_delete'),
 
     path('<pk>/add_label', views.LabelCreateView.as_view(), name='label_add'),
     # path('version/<pk>', views.VersionDetailView.as_view(), name='version_detail'),
