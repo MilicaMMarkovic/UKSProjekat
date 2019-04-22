@@ -61,27 +61,27 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='milestone',
             name='project',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='milestones', to='projekat.Project'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='milestones', to='project.Project'),
         ),
         migrations.AddField(
             model_name='label',
             name='project',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projekat.Project'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='project.Project'),
         ),
         migrations.AddField(
             model_name='issue',
             name='labels',
-            field=models.ManyToManyField(to='projekat.Label'),
+            field=models.ManyToManyField(to='project.Label'),
         ),
         migrations.AddField(
             model_name='issue',
             name='milestone',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='projekat.Milestone'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='project.Milestone'),
         ),
         migrations.AddField(
             model_name='issue',
             name='project',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projekat.Project'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='project.Project'),
         ),
         migrations.AlterUniqueTogether(
             name='project',

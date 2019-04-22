@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projekat', '0003_label'),
+        ('project', '0003_label'),
     ]
 
     operations = [
