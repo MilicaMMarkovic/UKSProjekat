@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.urls import reverse
 
 from .managers import ProjectManager
 
@@ -25,8 +26,8 @@ class Project(models.Model):
     class Meta:
         unique_together = (("owner", "title"),)
 
-    # def get_absolute_url(self):
-    #   return reverse('project:projekat_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('project:project_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "%s (%s)" % (self.title, self.owner)
