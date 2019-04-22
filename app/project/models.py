@@ -43,8 +43,8 @@ class Milestone(models.Model):
     class Meta:
         unique_together = (("project", "title"),)
 
-    # def get_absolute_url(self):
-    # return reverse('project:milestone_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('project:milestone_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Milestone: %s (%s)" % (self.title, self.project.title)
@@ -54,8 +54,8 @@ class Label(models.Model):
     name = models.CharField(max_length=50)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
-    # def get_absolute_url(self):
-    #   return reverse('project:label_detail', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('project:label_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Label: " + self.name

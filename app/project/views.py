@@ -6,8 +6,8 @@ from django.views.generic import DeleteView, ListView, CreateView, UpdateView, D
 from django.views.generic.detail import SingleObjectMixin
 from guardian.shortcuts import remove_perm, assign_perm
 
-from project.forms import ProjectForm, AddMemberForm
-from project.models import Project
+from project.forms import ProjectForm, AddMemberForm, MilestoneForm, IssueForm, LabelForm
+from project.models import Project, Milestone, Issue, Label
 
 
 class DeleteViewWithPermissions(DeleteView):
@@ -144,3 +144,59 @@ class ProjectMemberDeleteView(DeleteView, PermissionRequiredMixin):
         context['deleting_user'] = self.get_user_object()
         return context
 
+
+class MilestoneCreateView(PermissionRequiredMixin, CreateView):
+    model = Milestone
+    form_class = MilestoneForm
+    template_name_suffix = '_create_form'
+    context_object_name = 'milestone'
+    permission_required = 'change_project'
+
+    def form_valid(self, form):
+        project_id = self.kwargs['pk']
+        form.instance.project = Project.objects.get(id=project_id)
+        return_value = super().form_valid(form)
+        assign_perm("delete_milestone", self.request.user, form.instance)
+        assign_perm("change_milestone", self.request.user, form.instance)
+        return return_value
+
+    def get_permission_object(self):
+        return Project.objects.get(pk=self.kwargs['pk'])
+
+
+class IssueCreateView(PermissionRequiredMixin, CreateView):
+    model = Issue
+    form_class = IssueForm
+    template_name_suffix = '_create_form'
+    context_object_name = 'issue'
+    permission_required = 'change_project'
+
+    def form_valid(self, form):
+        project_id = self.kwargs['pk']
+        form.instance.project = Project.objects.get(id=project_id)
+        return_value = super().form_valid(form)
+        assign_perm("delete_issue", self.request.user, form.instance)
+        assign_perm("change_issue", self.request.user, form.instance)
+        return return_value
+
+    def get_permission_object(self):
+        return Project.objects.get(pk=self.kwargs['pk'])
+
+
+class LabelCreateView(PermissionRequiredMixin, CreateView):
+    model = Label
+    form_class = LabelForm
+    template_name_suffix = '_create_form'
+    context_object_name = 'label'
+    permission_required = 'change_project'
+
+    def form_valid(self, form):
+        project_id = self.kwargs['pk']
+        form.instance.project = Project.objects.get(id=project_id)
+        return_value = super().form_valid(form)
+        assign_perm("delete_label", self.request.user, form.instance)
+        assign_perm("change_label", self.request.user, form.instance)
+        return return_value
+
+    def get_permission_object(self):
+        return Project.objects.get(pk=self.kwargs['pk'])
