@@ -1,13 +1,17 @@
 # sudo: required
+os: linux
+dist: trusty
 language: python
 python:
 - 3.5.2
 
-# addons:
-  # apt:
-   # packages:
-    # - sshpass
+addons:
+  apt:
+   packages:
+    - sshpass
 services:
   - docker
 branches:
   - master
+  -projectCRUD
+  -loginAndRegister
