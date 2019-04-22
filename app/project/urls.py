@@ -8,8 +8,10 @@ urlpatterns = [
     path('<pk>/detail/', views.ProjectDetailView.as_view(), name='project_detail'),
     path('<pk>/update', views.ProjectUpdateView.as_view(), name='project_update'),
     path('<pk>/delete', views.ProjectDeleteView.as_view(), name='project_delete'),
+
     path('<pk>/add-member', views.ProjectMemberAddView.as_view(), name='project_member_add'),
     path('<pk>/remove-member/<upk>', views.ProjectMemberDeleteView.as_view(), name='project_member_remove'),
+
     path('<pk>/add_milestone', views.MilestoneCreateView.as_view(), name='milestone_add'),
     path('milestone/<pk>', views.MilestoneDetailView.as_view(), name='milestone_detail'),
     path('milestone/<pk>/update', views.MilestoneUpdateView.as_view(), name='milestone_update'),
@@ -21,7 +23,7 @@ urlpatterns = [
     path('issue/<pk>/delete', views.IssueDeleteView.as_view(), name='issue_delete'),
 
     path('<pk>/add_label', views.LabelCreateView.as_view(), name='label_add'),
-    # path('version/<pk>', views.VersionDetailView.as_view(), name='version_detail'),
-    # path('version/<pk>/update', views.VersionUpdateView.as_view(), name='version_update'),
-    # path('version/<pk>/delete', views.VersionDeleteView.as_view(), name='version_delete'),
+    path('label/<pk>', views.LabelDetailView.as_view(), name='label_detail'),
+    path('label/<pk>/update', views.LabelUpdateView.as_view(), name='label_update'),
+    path('label/<pk>/delete', views.LabelDeleteView.as_view(), name='label_delete'),
 ]

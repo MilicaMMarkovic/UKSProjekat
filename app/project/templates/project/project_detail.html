@@ -84,11 +84,11 @@
         </div>
         <div class="px-4">
             <h3 class="p-2">Labels: </h3>
-            <!--            {% for label in project.labels.all %}-->
-            <!--            <hr>-->
-            <!--            {% include "project/bases/label_detail_base.html" %}-->
-            <!--            </hr>-->
-            <!--            {% endfor %}-->
+            {% for label in project.labels.all %}
+            <hr>
+            {% include "project/bases/label_detail_base.html" %}
+            </hr>
+            {% endfor %}
         </div>
     </div>
 </div>

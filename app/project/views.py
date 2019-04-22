@@ -256,3 +256,31 @@ class LabelCreateView(PermissionRequiredMixin, CreateView):
 
     def get_permission_object(self):
         return Project.objects.get(pk=self.kwargs['pk'])
+
+
+class LabelUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Label
+    form_class = LabelForm
+    template_name_suffix = '_update_form'
+    context_object_name = 'label'
+    permission_required = 'change_label'
+
+
+class LabelDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+    model = Label
+    context_object_name = 'label'
+    permission_required = 'delete_label'
+
+    def get_success_url(self):
+        return reverse_lazy('project:project_detail', kwargs={'pk': self.get_object().project.id})
+
+
+class LabelListView(ListView):
+    model = Label
+    context_object_name = 'label_list'
+    queryset = Project.objects.all()
+
+
+class LabelDetailView(DetailView):
+    model = Label
+    context_object_name = 'label'
