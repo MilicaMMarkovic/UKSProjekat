@@ -2,14 +2,19 @@
 
 {% block content %}
 <div class="d-table mx-auto justify-content-sm-center">
-    <h1 class="p-2">Početna</h1>
-    <a href="{% url 'project:project_start' %}" class="btn btn-success m-2">Start a new project</a>
-    <div>
-        {% for project in object_list %}
-        <hr>
-        <a href="{{ project.get_absolute_url }}" class="mx-2">{{ project.title }}</a>
-        </hr>
-        {% endfor %}
-    </div>
+<!--    <h1 class="p-2">Početna</h1>-->
+    {% if user.is_authenticated %}
+            <h2>Moji projekti</h2>
+            <a href="{% url 'project:project_start' %}" class="btn btn-success m-2">Start a new project</a>
+            <div>
+                {% for project in object_list %}
+                    <hr>
+                        <a href="{{ project.get_absolute_url }}" class="mx-2">{{ project.title }}</a>
+                    </hr>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>Dobrodošli u <em>UKS</em>. Prijavite se za rad <a href="{% url 'login' %}">sign in</a></p>
+        {% endif %}
 </div>
 {% endblock %}
