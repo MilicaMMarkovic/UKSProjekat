@@ -26,7 +26,7 @@ class Project(models.Model):
         unique_together = (("owner", "title"),)
 
     # def get_absolute_url(self):
-    #   return reverse('projekat:projekat_detail', kwargs={'pk': self.pk})
+    #   return reverse('project:projekat_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "%s (%s)" % (self.title, self.owner)
@@ -43,7 +43,7 @@ class Milestone(models.Model):
         unique_together = (("project", "title"),)
 
     # def get_absolute_url(self):
-    # return reverse('projekat:milestone_detail', kwargs={'pk': self.pk})
+    # return reverse('project:milestone_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Milestone: %s (%s)" % (self.title, self.project.title)
@@ -54,7 +54,7 @@ class Label(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
 
     # def get_absolute_url(self):
-    #   return reverse('projekat:label_detail', kwargs={'pk': self.pk})
+    #   return reverse('project:label_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Label: " + self.name
@@ -70,7 +70,7 @@ class Issue(models.Model):
     milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL)
 
     # def get_absolute_url(self):
-    #    return reverse('projekat:issue_detail', kwargs={'pk': self.pk})
+    #    return reverse('project:issue_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
         return "Issue: %s (%s)" % (self.title, self.description)

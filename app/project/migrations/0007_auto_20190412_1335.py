@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projekat', '0006_auto_20190412_1320'),
+        ('project', '0006_auto_20190412_1320'),
     ]
 
     operations = [
@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=50)),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projekat.Project')),
+                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='project.Project')),
             ],
         ),
         migrations.RemoveField(
@@ -26,6 +26,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='issue',
             name='label',
-            field=models.ManyToManyField(to='projekat.Label'),
+            field=models.ManyToManyField(to='project.Label'),
         ),
     ]
