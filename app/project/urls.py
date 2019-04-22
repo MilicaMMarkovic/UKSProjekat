@@ -11,9 +11,9 @@ urlpatterns = [
     path('<pk>/add-member', views.ProjectMemberAddView.as_view(), name='project_member_add'),
     path('<pk>/remove-member/<upk>', views.ProjectMemberDeleteView.as_view(), name='project_member_remove'),
     path('<pk>/add_milestone', views.MilestoneCreateView.as_view(), name='milestone_add'),
-    # path('milestone/<pk>', views.MilestoneDetailView.as_view(), name='milestone_detail'),
-    # path('milestone/<pk>/update', views.MilestoneUpdateView.as_view(), name='milestone_update'),
-    # path('milestone/<pk>/delete', views.MilestoneDeleteView.as_view(), name='milestone_delete'),
+    path('milestone/<pk>', views.MilestoneDetailView.as_view(), name='milestone_detail'),
+    path('milestone/<pk>/update', views.MilestoneUpdateView.as_view(), name='milestone_update'),
+    path('milestone/<pk>/delete', views.MilestoneDeleteView.as_view(), name='milestone_delete'),
 
     path('<pk>/add_issue', views.IssueCreateView.as_view(), name='issue_add'),
     # path('issue/<pk>', views.IssueDetailView.as_view(), name='issue_detail'),
