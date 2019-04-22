@@ -164,6 +164,34 @@ class MilestoneCreateView(PermissionRequiredMixin, CreateView):
         return Project.objects.get(pk=self.kwargs['pk'])
 
 
+class MilestoneUpdateView(PermissionRequiredMixin, UpdateView):
+    model = Milestone
+    form_class = MilestoneForm
+    template_name_suffix = '_update_form'
+    context_object_name = 'milestone'
+    permission_required = 'change_milestone'
+
+
+class MilestoneDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+    model = Milestone
+    context_object_name = 'milestone'
+    permission_required = 'delete_milestone'
+
+    def get_success_url(self):
+        return reverse_lazy('project:project_detail', kwargs={'pk': self.get_object().project.id})
+
+
+class MilestoneListView(ListView):
+    model = Milestone
+    context_object_name = 'milestone_list'
+    queryset = Project.objects.all()
+
+
+class MilestoneDetailView(DetailView):
+    model = Milestone
+    context_object_name = 'milestone'
+
+
 class IssueCreateView(PermissionRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
