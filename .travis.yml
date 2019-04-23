@@ -1,12 +1,8 @@
 sudo: required
 language: python
 python:
-- 3.5.2
+- '3.5'
 
-addons:
-  apt:
-    packages:
-    - sshpass
 services:
 - docker
 
@@ -21,18 +17,19 @@ branches:
 
 
 before_install:
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker --version
 
 install:
-- docker images
+- pip install -r requirements.txt
 
-script:
+#script:
 #- docker-compose up -d
 #- python tests.py
 
-#after_success:
-#- export SSHPASS=$DEPLOY_PASS
+after_success:
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+- docker push $DOCKER_HUB_USERNAME/uks-projekat:proba
+
 env:
   global:
   - secure: tWM8rtfzwxUZxgwTzzdIxYVASgh6e0k4/HN1fJ20BawrSfYp8SR5q4RaCMxe2MjeVxbwMjaAPrO8iZrpqFRvGYPROrJyj6X3J+OXm2REhIbv634483eyLi0av7XczZd4bvoCluZYJum5FJ/37OxfesTxdbC8mW5uRQHz81Xj4M7GdnMNCb/E5p6LFEMEAmNuygODvqp3uxa5ActtTpxhj/j6H5FFm6bqYfbGWQaZED9w1h5Lm8L3i1NIuD6qbjcuvjiELMceJp21GBZoFJHww5rrBKTWL9Bcq98euDxciTtecPhkegMqdfeDxbKdYY7saDN9/K1Rpd2lGZMs+qxxHKBth/kTEs+XE3fUIUZkvYOkiW0brn4v+Kcnz0/2/ADOepur1f4TVxI5QYlsBXdwr4IcRbWwDHzKy3gvvOXsruSiMlf8DdHmNOj/4mtc30ydSqu08MFnkQgSA0X8YlbLop1KuIA8l7g7mihkB3+N/ji5w/D+1x8/SSQB0EtO3V8G7o+gqMiDwzI+J363HSe85hfp5LH1cPYNJJ2SWY5enK/F9mCqU+A9PAOygIp0UycCbjo7/kzyJJIyqbO0nucdYF5S4ktIQJVnrALx8voskhv+nsnbvEmrEg86GeWNgeHVqmczHeucrbPwYSYepWhki9nHcJ+2EBGX1ni3xhQeOzI=
