@@ -32,7 +32,7 @@ install:
 
 script:
 #- docker-compose up -d
-- python tests.py
+#- python tests.py
 
 #after_success:
 #- export SSHPASS=$DEPLOY_PASS
