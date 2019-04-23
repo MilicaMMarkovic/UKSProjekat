@@ -2,7 +2,7 @@
 {% block content %}
 <div class="d-table mx-auto">
     {% if form.errors %}
-    <p>Nisu ispravni username i password. Pokušajte ponovo.</p>
+    <p>Not correct username and password. Try again.</p>
     {% endif %}
 
     <form method="post" action="{% url 'login' %}">

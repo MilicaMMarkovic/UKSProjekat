@@ -10,10 +10,10 @@
     <b>Date due:</b> {{ milestone.due_date }}
 </div>
 <div class="btn-group btn-group-sm" role="group">
-    <a href="{% url 'project:milestone_update' milestone.id %}" class="btn btn-warning" role="button">
+    <a href="{% url 'project:milestone_update' milestone.id %}" class="btn btn-primary" role="button">
         Update
     </a>
-    <a href="{% url 'project:milestone_delete' milestone.id %}" class="btn btn-danger" role="button">
+    <a href="{% url 'project:milestone_delete' milestone.id %}" class="btn btn-secondary" role="button">
         Delete
     </a>
 </div>

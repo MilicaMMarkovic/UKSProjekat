@@ -8,7 +8,7 @@
             <form action="" method="post">{% csrf_token %}
                 <input type="submit" class="btn btn-danger p-1" value="Confirm" />
             </form>
-            <a href="{{ project.get_absolute_url }}" class="btn btn-secondary p-1">Cancel</a>
+            <a href="{{ project.get_absolute_url }}" class="btn btn-primary p-1">Cancel</a>
         </div>
     </div>
 {% endblock content %}

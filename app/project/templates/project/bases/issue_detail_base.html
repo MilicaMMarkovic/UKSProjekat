@@ -6,14 +6,14 @@
 <div class="">
     <b>Description:</b> {{ issue.description }}
 </div>
-<!--<div>-->
-    <!--<b>Date due:</b> {{ issue.due_date }}-->
-<!--</div>-->
+<div>
+    <b>Date due:</b> {{ issue.due_date }}
+</div>
 <div class="btn-group btn-group-sm" role="group">
-    <a href="{% url 'project:issue_update' issue.id %}" class="btn btn-warning" role="button">
+    <a href="{% url 'project:issue_update' issue.id %}" class="btn btn-primary" role="button">
         Update
     </a>
-    <a href="{% url 'project:issue_delete' issue.id %}" class="btn btn-danger" role="button">
+    <a href="{% url 'project:issue_delete' issue.id %}" class="btn btn-secondary" role="button">
         Delete
     </a>
 </div>

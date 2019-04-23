@@ -4,8 +4,8 @@
 <div class="d-table mx-auto justify-content-sm-left">
 <!--    <h1 class="p-2">Početna</h1>-->
     {% if user.is_authenticated %}
-            <h2>Moji projekti</h2>
-            <a href="{% url 'project:project_start' %}" class="btn btn-success m-2">Start a new project</a>
+            <h2>My projects</h2>
+            <a href="{% url 'project:project_start' %}" class="btn btn-secondary m-2">Start a new project</a>
             <div>
                 {% for project in object_list %}
                     <hr>
@@ -14,7 +14,7 @@
                 {% endfor %}
             </div>
         {% else %}
-            <p>Dobrodošli u <em>UKS</em>. Prijavite se za rad <a href="{% url 'login' %}">sign in</a></p>
+            <p>Welcome <em>UKS</em>. Please <a href="{% url 'login' %}">sign in</a></p>
         {% endif %}
 </div>
 {% endblock %}
