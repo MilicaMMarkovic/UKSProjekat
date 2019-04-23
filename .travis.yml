@@ -14,6 +14,10 @@ install:
   - docker images
   - pip install -r requirements.txt
 
+script:
+  - python tests.py
+  - docker-compose up -d
+
 branches:
   - master
   - projectCRUD
@@ -34,6 +38,5 @@ script:
   - docker-compose up -d
   
 after_success:
-#  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - docker push $DOCKER_USERNAME/uks_projekat:latest
   - export SSHPASS=$DEPLOY_PASS
