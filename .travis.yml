@@ -1,43 +1,48 @@
 sudo: required
 language: python
 python:
-  - '3.5.2'
+- 3.5.2
 
 addons:
   apt:
     packages:
     - sshpass
 services:
-  - docker
-  
-install:
-  - docker images
-  - pip install -r requirements.txt
-
-script:
-  - python tests.py
-  - docker-compose up -d
+- docker
 
 branches:
-  - master
-  - projectCRUD
-  - loginAndRegister
-  - issueCRUD
-  - milestoneCRUD
-  - labelCRUD
-  - homepage
+- master
+- issueCRUD
+- homepage
+- loginAndRegister
+- milestoneCRUD
+- labelCrud
+- projectCRUD
+
 
 before_install:
-  - docker --version
-  - docker build -t $DOCKER_USERNAME/uks_projekat:latest .
-  - docker images 
-  - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in deploy_key.enc -out ./deploy_key -d
-  
+- openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv
+  -in secrets.tar.enc -out ./secrets.tar -d
+- tar xvf secrets.tar
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+- docker --version
+
+install:
+- docker images
+
 script:
-  - python tests.py
-  - docker-compose up -d
-  
+- docker-compose up -d
+- docker-compose run web python3 manage.py test -v2
+
 after_success:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-  - docker push $DOCKER_USERNAME/uks_projekat:latest
-  - export SSHPASS=$DEPLOY_PASS
+- export SSHPASS=$DEPLOY_PASS
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: docker tag uks-projekat "$DOCKER_USERNAME"/uks-projekat:production && 
+          docker push $DOCKER_USERNAME/uks-projekat:production && 
+          chmod 600 deploy/deploy_key && 
+          sshpass -e ssh -o StrictHostKeyChecking=no -i ./deploy/deploy_key $HOST@$HOST_IP './milicamm/uks-projekat/deploy.sh'
+  on:
+    branch: master
