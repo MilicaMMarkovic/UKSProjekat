@@ -28,7 +28,7 @@ install:
 
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-- docker push $DOCKER_HUB_USERNAME/uks-projekat:proba
+- docker push $DOCKER_USERNAME/uks-projekat:proba
 
 env:
   global:
