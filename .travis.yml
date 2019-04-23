@@ -14,6 +14,10 @@ install:
   - docker images
   - pip install -r requirements.txt
 
+script:
+  - python tests.py
+  - docker-compose up -d
+
 branches:
   - master
   - projectCRUD
@@ -24,16 +28,16 @@ branches:
   - homepage
 
 before_install:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - docker --version
   - docker build -t $DOCKER_USERNAME/uks_projekat:latest .
+  - docker images 
   - openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in deploy_key.enc -out ./deploy_key -d
-
+  
 script:
   - python tests.py
   - docker-compose up -d
   
 after_success:
-#  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
   - docker push $DOCKER_USERNAME/uks_projekat:latest
   - export SSHPASS=$DEPLOY_PASS
