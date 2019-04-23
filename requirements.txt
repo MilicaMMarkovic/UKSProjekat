@@ -4,3 +4,4 @@ django-registration-redux
 django-crispy-forms
 psycopg2
 pytz
+Jinja2
