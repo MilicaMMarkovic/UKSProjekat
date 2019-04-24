@@ -21,7 +21,7 @@ branches:
 - projectCRUD
 before_install:
 - docker --version
-- docker build -t $DOCKER_USERNAME/uks-projekat:proba .
+#- docker build -t $DOCKER_USERNAME/uks-projekat:proba .
 install:
 - pip install -r requirements.txt
 - docker images
