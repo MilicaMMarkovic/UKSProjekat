@@ -21,16 +21,22 @@ branches:
 - projectCRUD
 before_install:
 - docker --version
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 install:
 - pip install -r requirements.txt
+- docker images
 script:
 - cd ./app
 - cd ./project
-- docker-compose run web python3 manage.py test
+- docker-compose up -d
+- docker-compose run web python manage.py test
 after_success:
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+#- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
 deploy:
+  provider: script
+  skip_cleanup: true
+  script: docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
 env:
