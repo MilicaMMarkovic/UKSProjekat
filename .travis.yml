@@ -1,9 +1,11 @@
 sudo: required
 language: python
 python:
-- '3.5'
+- "3.5"
 services:
 - docker
+- postgresql
+dist: trusty
 branches:
 - master
 - issueCRUD
@@ -14,13 +16,22 @@ branches:
 - projectCRUD
 before_install:
 - docker --version
+- psql -c 'create database uks_projekat;' -U postgres
 install:
 - pip install -r requirements.txt
+script:
+  - pytest
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
+
+deploy:
+  on:
+    branch: master
+
 env:
   global:
+  - PGPORT=5433
   - secure: ok9r/MiqEP/b9UJf+3G7CXTL7ZhENYBSug2iCrEjFisFme8oTHr/PaaJOgJu9NDhHzVeK/8hjVxeqsCcIoMXJ+P1aTOq1JaLg5eo4JWYZX9sApvg9L2p/h+EBj9ItP5f1IDXU+8486at9+EHLC3WG/pilznkx3A+3P8KZB08WHbpHJDRuHBgI2Pr6um+iEAJ/tXBwO3cTzdowh0keiSbr0GsnpXAjrt6/6yIUhpsaUhYG546eyYzb2b81Va+H/WVDmNfGCNuwm+lJy4jzlIqmce/MllxKiQoTGtkHk2ONTn8Mgyf9iuZkSeIs5pB5GRj8uqO6socHm/Tm2LRjP1C9IgvP0IR6jYDVJoZIm3oKxzJJ+Tt2uz2McbJx4B/AWj7Qlc7AWyYYO+lq+mmmeTPINEI1n4mzQictzdoaT8ncg6gWJsggC2VfnyWvqo2cEE8cMZcGNlGQNt2c66huq4/eCwEJvGtwlcGYxjCdY7SY9jd/2BgshHLOJyQx0nebZCuGCWbxaAZSCla7K2GYcTNNiSsTyQyt31S3NBXdLeZrkc9zK10xd48OIqxsIoF0cA7PH4ulRAQJIygi6vWNLifZ0kqI3IqchrM1IlGiYG5P74OihGyqPKpPLc8TFZFyrO2cnHSMrOYF1w5BUB7mWkR36wq9AKcDgaOvXKtQ7ukUYY=
   - secure: WHvBtCfNGTb654UeIcdPuBRjMrv7XtBkyzDbJGQ8NKNpW649GV2K47+MhR16jR7M92kdXqHCdOSF9z19mRJBExY/10yxvkNB9K2JH+Gsp+EPwPzKhfSwuPhgmTxZtX/RCN0kgE8308NhfbF6HhFG/dsuGvlDbnJMuQsB6w0viHqDcrM5bDZEFTxHYxXh9YwAVJwvYQZPcXeVGxaH7fsGOk2gCtR/fn0uHxvfbc30gX1c5jEIIwGUdMfS8Ccrsgbj4CJx7OzXVyetnKvWYH+09t3OdKndXdcUVzCHDZdItPOkQH7TZpbCY04GCG81t8NrVaC5a6iiyYDAnrdAk8LVMHSeK0ytDLMXWXmQbU7ap/P7bJsm5/UUbUtJP5WALb/qssOr191cxux9hXDPgkX9+gXymtzGL6YoCyJu8kh0Jr/aQWUIKLLTQNepOG64ivJNwzt8MOC/n5LpUNPcar6q95wS56gEpp7v6VmgE4tv6cmZDAyxp3MB6sRKZVQHSHv1viB5gp41FDh4qF4hUihEGq7Lu2a9MhaUmrcP9Ee2UdWyvY4IXSDdpVeaJZKl5k44MlTim7D/ybYR2WbDvG7no6HEMNzHtD7+8888ZlW7ezJYKaMXooplj2+ZeybfpEsDW0ZWW/CF3tjt9quFHRAjrUiH1pRlHj7MKuXouCYDN6k=
   - secure: jdLLyZikNRSkrOzkk3rYs8fShUyWfN5df4W4rGP1tk+fUfwJ4KsGxF/xMELRsZb8C/f4Zgyf4n6Dok0JhoMjNsBSoa8ol2UywRLJp+hrcGH2W/SJY5qcDyejV20VuByXdExzDyN7nzDOhhAzPxclR9a++h7GHVawSPbo21Ko4P4twHkPsjmHrb4kyEffc2G6xmR/DiqauhlrbF5CPIS4VYp41yLYM270jBE6oqWdWqKUBt5ckiSFBZhmrn8Ee8KsJ7a+EGPohDiZKP97+LcJhZHuWa4sD3B9kEA6CspSv/aCKFoiIPryHaM9kJ5IOIvfbGAZ0UAqsOAtdjOWNerpdpXPPTixUN4zmRfoD6cvsCMew8zaA+oJdWguM4x2f9JZEjwMzLATaNTorDnzKKTi6nArl8UGoRC0sgXdlloZ03Gi2PCAtA2Tj5OKcA9l7dkvZjgecPY1HC4b75uuDN66UHrvNFQ3CI+tzK5Da0ZUOKxC5jDZec+0qPsgnVeml1mPZA146JmMyzcT3vHNOKPX4TM8meC6WJc12C/R/5ELvdKr3RP+Gz2L3S9f/vxSaVbjRumeTGGZyRaA5Zwkd021McUGbFJ4CSWHxmp6sincn4eHXaPRAu9rP/KUTaOHA+f0w8++tfIMMA6jP9IFEJo8n9YyEe/EuhLS77mrHfyt2jo=
