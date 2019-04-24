@@ -2,15 +2,6 @@ version: '2'
 
 services:
 
-  web:
-    build: .
-    volumes:
-      - ./app:/usr/src/app
-    ports:
-      - "8011:8011"
-    depends_on:
-      db:
-      
   db:
     image: postgres
     restart: always
@@ -18,3 +9,13 @@ services:
       - ./postgres-data:/var/lib/postgresql/data/
     environment:
       POSTGRES_PASSWORD: postgres
+
+  web:
+    build: .
+    volumes:
+      - ./app:/usr/src/app
+    ports:
+      - "8011:8011"
+    depends_on:
+      - db
+
