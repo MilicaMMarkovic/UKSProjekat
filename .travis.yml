@@ -1,7 +1,7 @@
 sudo: required
 language: python
 python:
-- "3.5"
+- '3.5'
 services:
 - docker
 - postgresql
@@ -19,15 +19,15 @@ before_install:
 install:
 - pip install -r requirements.txt
 script:
-  - pytest
+- pytest
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
-
 deploy:
   on:
     branch: master
-
 env:
   global:
   - PGPORT=5433
+  - secure: toHVDZsOkmJGCkC6amk/NtzabaQXa8Y7SbcK3BJW9Ft+hXqtWftdg/V+mZ1Ry0PihiMRNOi4fkvtIKYpu7x+5LJyIbavtI7fLu2SBGEzJ04yk5Qj2yUdxQXW0d+lQGJTmW3XEIK7HXhWw7qy2nZRR9uNV3SZ5En+dYQ2WRjyJl62TG3Tk3dU7fphj8TtLYSVV3w4E1TgdP8N/Cn6JQ8tCFKA6UE6u8UK33CW99M/nP4BVc0fzh8N+dWWo+JTMvlWr+hLwn4lZiBnHkBTcF4Ndb6sthvCwbDynQD8ReKGTdQXvM6IY4zspGT6u+6gU79HV9hdZhJUGwgjqhuzhGuiCLM0vNk82I2Hl6D6d6VHqYwiUD9HfLiG43FYbCMPmU0xMeohaMRZbrxdK++ivqWzErBBQLUxF789Z+aJGp3oarcP1xBqcpxxW6cW4FOkDsS5JR/lS90kFGpWxht+17La6YrjymI1ZrEjw7wArkmD82NPf0/TY/qVEqNunt1nPMcUmNmtY5YMEFI5JEmVpNuer/jdeYNUOs8f8Y4t6JAJtcu6NlWxD2BC3hHfzx/FscmJcYEFcmjSwKQqMw1D0Oz+aPiR77CTz1/jbYb5a8VJ8Ew/Kl5kSrC92wVVk4xs9XTLCJv5zJ9X4C2TjyMgYKOUKRwJsKImYeaTQMmfQQGfAmk=
+  - secure: cx0rZbO+a8E7PlzDd5Fai/fyUWJrzpl+yDDfaRK7JxKTTJURC0Zq3POgjr7O0Noa7BLmQeXvUUGbz/qJpvibsN0qWPFkkubcli42euOwHxx/wXq1CybpakhUY/l9ojyLLfghmPq+lZTqC8NEtBq4LHsdl0AddnfAvr5fH631ViOVO72dL+XrfQf/owZW8XcfwrIBnn9BIbHLamZygcrTIRRfE8O/FrXs49w3tZWJwOAM6QCNGPfqGLZ0pL0HtttDROCX0F6+NNCfF/8iwVVknnIgxFGCfg0KJyUQoDfYKpjSIaxZPJtWBAJSaICbS8yZy2E5zk5G9VDG9JDWxxAtjIqlIQ6Ryfiu2WI5iaHsls+N4U7fS5sgZZIJCPa64kjcG6xdl6iI0PVpQ1Abmomo4ekXm+L9rZ8hhv9edKorhNm+Or3ccALK5evWzYESkGnpK6s44ewAqkS31R3nLp6QnMOyN0g2ZMHgMkxIkim/e25TbLkK0s7fot1bnywUmSbqfBXujoAg9rzkmy4boAMYEC8AJ6PVevWQ2cz5FYkESvg13Ml5MzIx9VQlfr58e1j7YHojijTswhdKfC9B272MowPdq66WZU6+TOJsy8D3Mpkw73je/hyVvzwB7G3HVj5Kv45vWUmbCa1vneOTROncCugG5U5ZKqecZwfDvUSIOb4=
