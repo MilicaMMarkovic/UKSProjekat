@@ -5,6 +5,11 @@ python:
 services:
 - docker
 - postgresql
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-10
 dist: trusty
 branches:
 - master
