@@ -21,7 +21,7 @@ branches:
 - projectCRUD
 before_install:
 - docker --version
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+- docker build -t $DOCKER_USERNAME/uks-projekat:proba .
 install:
 - pip install -r requirements.txt
 - docker images
@@ -31,6 +31,7 @@ script:
 - docker-compose up -d
 - docker-compose run web python manage.py test
 after_success:
+- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
 deploy:
   provider: script
