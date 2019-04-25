@@ -29,9 +29,9 @@ script:
 - cd ./app
 - cd ./project
 - docker-compose up -d
-- docker-compose run web python manage.py test
+#- docker-compose run web python manage.py test
 after_success:
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+#- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
 deploy:
   provider: script
