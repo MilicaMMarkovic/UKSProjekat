@@ -32,11 +32,11 @@ script:
 #- docker-compose run web python manage.py test
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-- docker push milicamm/uks-projekat:proba
+- docker push $DOCKER_USERNAME/uks-projekat:proba
 deploy:
   provider: script
   skip_cleanup: true
-  script: docker push milicamm/uks-projekat:production
+  script: docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
 env:
