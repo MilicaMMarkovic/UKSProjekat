@@ -33,10 +33,11 @@ script:
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
+
 deploy:
   provider: script
   skip_cleanup: true
-  script: docker tag "$DOCKER_USERNAME"/uks-projekat:latest "$DOCKER_USERNAME"/uks-projekat:production &&
+  script: docker tag "$DOCKER_USERNAME"/uks-projekat:proba "$DOCKER_USERNAME"/uks-projekat:production &&
           docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
