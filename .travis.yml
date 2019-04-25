@@ -36,7 +36,8 @@ after_success:
 deploy:
   provider: script
   skip_cleanup: true
-  script: docker push $DOCKER_USERNAME/uks-projekat:production
+  script: docker tag uks-projekat "$DOCKER_USERNAME"/ukshub:production &&
+          docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
 env:
