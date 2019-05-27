@@ -7,4 +7,4 @@ COPY app/. /usr/src/app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 EXPOSE 8011
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8011"]
+CMD python manage.py runserver 0.0.0.0:8011
