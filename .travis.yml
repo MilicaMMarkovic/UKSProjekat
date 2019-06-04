@@ -27,12 +27,13 @@ install:
 - docker images
 script:
 - docker-compose up -d
-- cd ./app
-- cd ./project
-- python tests.py
+- python manage.py test
+#- cd ./app
+#- cd ./project
+#- python tests.py
 #– python -m pytest -v
 #- pytest
-#- docker-compose run web python manage.py test
+- docker-compose run web python manage.py test
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
