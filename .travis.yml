@@ -29,7 +29,8 @@ script:
 - docker-compose up -d
 - cd ./app
 - cd ./project
-– python -m pytest -v
+- python tests.py
+#– python -m pytest -v
 #- pytest
 #- docker-compose run web python manage.py test
 after_success:
