@@ -29,6 +29,7 @@ script:
 - docker-compose up -d
 - cd ./app
 - cd ./project
+- pytest
 #- docker-compose run web python manage.py test
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
