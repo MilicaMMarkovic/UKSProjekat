@@ -30,7 +30,7 @@ script:
 #- docker-compose up -d
 #- python manage.py test
 - cd ./app
-- cd ./project
+#- cd ./project
 #- python tests.py
 #– python -m pytest -v
 #- pytest
