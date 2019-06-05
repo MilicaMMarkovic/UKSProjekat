@@ -4,36 +4,39 @@ python:
 - '3.5'
 services:
 - docker
-- postgresql
-addons:
-  postgresql: '10'
-  apt:
-    packages:
-    - postgresql-10
-dist: trusty
+#- postgresql
+#addons:
+#  postgresql: '10'
+#  apt:
+#    packages:
+#    - postgresql-10
+#dist: trusty
 branches:
 - master
-- issueCRUD
-- homepage
-- loginAndRegister
-- milestoneCRUD
-- labelCrud
-- projectCRUD
+#- issueCRUD
+#- homepage
+#- loginAndRegister
+#- milestoneCRUD
+#- labelCrud
+#- projectCRUD
 before_install:
 - docker --version
 - docker build -t $DOCKER_USERNAME/uks-projekat:proba .
+- docker images
 install:
 - pip install -r requirements.txt
-- docker images
+
 script:
-- docker-compose up -d
+#- docker-compose up -d
 #- python manage.py test
 - cd ./app
 - cd ./project
 #- python tests.py
 #– python -m pytest -v
 #- pytest
-#- docker-compose run web python manage.py test
+- docker-compose run web python manage.py makemigrations
+- docker-compose run web python manage.py migrate
+- docker-compose run web python manage.py test
 after_success:
 - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
 - docker push $DOCKER_USERNAME/uks-projekat:proba
