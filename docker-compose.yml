@@ -1,7 +1,6 @@
 version: '2'
 
 services:
-
   db:
     image: postgres
     restart: always
@@ -12,10 +11,11 @@ services:
 
   web:
     build: .
+    restart: always
     volumes:
-      - ./app:/usr/src/app
+      - ./:/code
     ports:
-      - "8011:8011"
+      - "8000:8000"
     depends_on:
       - db
 
