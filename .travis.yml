@@ -33,7 +33,7 @@ after_success:
 deploy:
   provider: script
   skip_cleanup: true
-  script: docker tag "$DOCKER_USERNAME"/uks-projekat:proba "$DOCKER_USERNAME"/uks-projekat:production &&
+  script: sudo docker tag "$DOCKER_USERNAME"/uks-projekat:proba "$DOCKER_USERNAME"/uks-projekat:production &&
           docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
