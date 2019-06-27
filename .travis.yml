@@ -1,7 +1,7 @@
 sudo: required
 language: python
 python:
-- '3.5'
+- '3.6'
 services:
 - docker
 #- postgresql
@@ -20,27 +20,27 @@ branches:
 #- labelCrud
 #- projectCRUD
 before_install:
-- docker --version
-- docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-- docker build -t $DOCKER_USERNAME/uks-projekat:proba .
-- docker images
+- sudo docker --version
+- sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+- sudo docker build -t $DOCKER_USERNAME/uks-projekat:proba .
+- sudo docker images
 install:
 - pip install -r requirements.txt
 
 script:
-- docker-compose up -d
+- sudo docker-compose up --build
 #- python manage.py test
-- cd ./app
+#- cd ./app
 #- cd ./project
 #- python tests.py
 #– python -m pytest -v
 #- pytest
-- docker-compose run web python manage.py makemigrations
-- docker-compose run web python manage.py migrate
-- docker-compose run web python manage.py test
+- sudo docker-compose run web python app/manage.py makemigrations
+- sudo docker-compose run web python app/manage.py migrate
+- sudo docker-compose run web python app/manage.py test
 after_success:
 
-- docker push $DOCKER_USERNAME/uks-projekat:proba
+- sudo docker push $DOCKER_USERNAME/uks-projekat:proba
 
 deploy:
   provider: script
@@ -51,6 +51,6 @@ deploy:
     branch: master
 env:
   global:
-  - PGPORT=5433
+  - PGPORT=5432
   - secure: b2ehLyJW13CgiTI0Q5+I6hXRGU7G1/ZuAxJApO8acKmrutO9YJL5/ufJCAaCr6ehWilFrtK4A1wE3yLYy8pjPKB7Bk/mlk1RDcqgKadi+A0fQFY0qcdlEUfs2wNrxW1gGdgvJMNxat56arN1n2pymbnNi5DanAG8MecBkxl6CXmQ7LpZeiPNuhmB2NBIdSCpwPFUM/HQJZqQhGLnvdqywGJwKcF/T1oKUqUy+u68xLoaTgcoiHBLBbSJrumWXSGi7wRJ2UEaWJXfbdmc4hxfAMVlHV939hVXVP/l8cjb+N5BD003+21c9ATBtRUYF9eu4RzLX0G6scdO6J06S/Flo1Evcq7KHoI5qYltxqeqSODHrqz4O02Lq2TpjCi5JQDdzz6tvDJTpsdkCsHUCgM9lvxtcIfRsun5oLbidXZMdoIIlpCrMUxUkeurnoCWNJnO3OgEvD2xJ090qHlVsNAUN6Dxu/C5Gij58GNjSh5Rb1nWBotbv6A74RC9Zi6soRvSHP74voy+u7uKhTDjTvii3pxpSKNcndUXq9q2gkYwQwgGJzjL3vj1XFgx2bXrjKLRUDSi/N8TeNDux84gOcQyT3PFoMzJqeficuk+OJFiIm36HgS6S1HAVQiO+RpZNy4PN0RekKR0iz1+A4wLxLILIpCiyj4owzptPARl2uIGNyk=
   - secure: eQDCZDUBuwJ5OeaAGjPlPHa9IiMkE5hP0VAELnAr5X7fVynyMz1xzP3V5SAlBq7Q0sFwn5FJRg+fuxNi2fY3Zq9aWH6QmXEBBaYjDe1YK6yudR5mfEMHSG2/ZLR5A986p1hKqCZFEN53Hmdur5ajkyNBrrm+p4VcdyMtk77FaDg1FcVSKYbT4q8BmOtKR0vt9eN2ojUTBkUis5avIyl8/qNIv94lGEDVVHA1n/Llgpm1s44w5rT/mFVsGpf/gAuDy+pUG3wKTiepV1BCG8bP56d+QxSJD8fyHnTEC5w9daD0DDx3RgdF8GhJ2KbVOTMh6Tv8YzlIsSZjmxnvm1rHX3arh8KGaxExfE7f5y05HHXIgWaIZ6mg26cOeb6CTyWZLUIWR9fMzQ8ORSrQfxBrSReaNQMZRXRx2kaozugxdQCXJcc5HrcJa6l5QdonZO0HbfaQ8OJF9BXsJHr2JVyrB8QZtayI4Q/w6IkTkq3OpKhOYdRdrqPNlH5jyU600tPafbII45jop57rWGt5XNXpWgSW1h9v7RwG/fysBWlj3UjG5pns1sL4eKqhf5wSoiXaW93pG1tI1p1u5hMRbHolOUocGut0vEUK9kqht24rhmn5kQGGPvriqVE9R8Mts+aMOXGei8NwMT5nDwagkDkN83ZLG6ozZMguA42eqnDfkNQ=
