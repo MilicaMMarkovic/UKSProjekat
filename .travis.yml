@@ -13,12 +13,6 @@ services:
 #dist: trusty
 branches:
 - master
-#- issueCRUD
-#- homepage
-#- loginAndRegister
-#- milestoneCRUD
-#- labelCrud
-#- projectCRUD
 before_install:
 - sudo docker --version
 - sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
@@ -28,13 +22,7 @@ install:
 - pip install -r requirements.txt
 
 script:
-- sudo docker-compose up --build
-#- python manage.py test
-#- cd ./app
-#- cd ./project
-#- python tests.py
-#– python -m pytest -v
-#- pytest
+- sudo docker-compose up -d
 - sudo docker-compose run web python app/manage.py makemigrations
 - sudo docker-compose run web python app/manage.py migrate
 - sudo docker-compose run web python app/manage.py test
