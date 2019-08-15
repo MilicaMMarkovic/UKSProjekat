@@ -9,10 +9,12 @@ services:
   web:
     container_name: web
     build: .
-    command: python app/manage.py runserver 0.0.0.0:8001
+    command: python manage.py makemigrations
+    command: python manage.py migrate
+    command: python manage.py runserver 0.0.0.0:8001
     restart: always
     volumes:
-      - .:/code
+      - ./app:/code
     expose:
       - "8001"
     ports:
