@@ -90,7 +90,10 @@ class IssueForm(forms.ModelForm):
 
     class Meta:
         model = Issue
-        fields = ['title', 'description', ]
+        fields = ['title', 'description', 'due_date', 'label', 'milestone', ]
+        widgets = {
+            'due_date': forms.TextInput(attrs={'type': 'date'})
+        }
 
 
 class LabelForm(forms.ModelForm):

@@ -67,8 +67,8 @@ class Issue(models.Model):
     assignees = models.ManyToManyField(User, related_name='assignees')
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name="issues", blank=False)
     due_date = models.DateField('Due date')
-    # label = models.ManyToManyField(to=Label)
-    # milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL)
+    label = models.ForeignKey(to=Label, null=True, on_delete=models.SET_NULL, related_name="issues")
+    milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL, related_name="issues")
 
     def get_absolute_url(self):
        return reverse('project:issue_detail', kwargs={'pk': self.pk})

@@ -9,6 +9,12 @@
 <div>
     <b>Date due:</b> {{ issue.due_date }}
 </div>
+<div>
+    <b>Label:</b> {{ issue.label }}
+</div>
+<div>
+    <b>Milestone:</b> {{ issue.milestone }}
+</div>
 <div class="btn-group btn-group-sm" role="group">
     <a href="{% url 'project:issue_update' issue.id %}" class="btn btn-primary" role="button">
         Update
