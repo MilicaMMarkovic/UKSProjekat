@@ -23,9 +23,9 @@ install:
 
 script:
 - sudo docker-compose up -d
-- sudo docker-compose run web python app/manage.py makemigrations
-- sudo docker-compose run web python app/manage.py migrate
-- sudo docker-compose run web python app/manage.py test
+- sudo docker-compose run web python manage.py makemigrations
+- sudo docker-compose run web python manage.py migrate
+- sudo docker-compose run web python manage.py test
 after_success:
 
 - sudo docker push $DOCKER_USERNAME/uks-projekat:proba
