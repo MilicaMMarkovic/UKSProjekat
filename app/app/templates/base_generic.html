@@ -38,20 +38,18 @@
         <!-- centar -->
         <ul class="navbar-nav justify-content-sm-center mx-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'index' %}">Početna <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'project:project_list' %}">Projekti</a>
+                <a class="nav-link" href="{% url 'project:project_list' %}">Projects</a>
             </li>
-            <!--<li class="nav-item">-->
-            <!--<a class="nav-link disabled" href="#">Issues</a>-->
-            <!--</li>-->
+
         </ul>
         <!-- desno -->
         <ul class="navbar-nav justify-content-sm-end">
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-                <a class="nav-link" href="#">Koriskik: {{ user.username }}</a>
+                <a class="nav-link" href="#">User: {{ user.username }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Logout</a>
