@@ -13,6 +13,6 @@ class ProjectAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Project, admin_class=ProjectAdmin)
-admin.site.register(Milestone)
-admin.site.register(Issue)
-admin.site.register(Label)
+# admin.site.register(Milestone)
+# admin.site.register(Issue)
+# admin.site.register(Label)

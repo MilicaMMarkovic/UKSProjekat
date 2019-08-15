@@ -66,6 +66,7 @@ class Issue(models.Model):
     description = models.CharField(max_length=250)
     assignees = models.ManyToManyField(User, related_name='assignees')
     project = models.ForeignKey(to=Project, on_delete=models.CASCADE, related_name="issues", blank=False)
+    due_date = models.DateField('Due date')
     # label = models.ManyToManyField(to=Label)
     # milestone = models.ForeignKey(to=Milestone, null=True, on_delete=models.SET_NULL)
 

@@ -48,7 +48,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
         return return_value
 
 
-class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     form_class = ProjectForm
     template_name_suffix = '_update_form'
@@ -56,7 +56,7 @@ class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_project'
 
 
-class ProjectDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+class ProjectDeleteView(LoginRequiredMixin, DeleteViewWithPermissions):
     model = Project
     success_url = reverse_lazy('project:project_list')
     context_object_name = 'project'
@@ -71,7 +71,6 @@ class ProjectDetailView(DetailView):
         model = Project
         context_object_name = 'project_list'
 
-        # TODO: change so only projects user is owner and member are shown
         def get_queryset(self):
             user_query = self.request.GET.get('username') or self.request.user.username
             queried_user = User.objects.get(username=user_query)
@@ -84,7 +83,6 @@ class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'project_list'
 
-    # TODO: change so only projects user is owner and member are shown
     def get_queryset(self):
         user_query = self.request.GET.get('username') or self.request.user.username
         queried_user = User.objects.get(username=user_query)
@@ -93,7 +91,7 @@ class ProjectListView(LoginRequiredMixin, ListView):
         return owners.union(members)
 
 
-class ProjectMemberAddView(FormView, SingleObjectMixin, PermissionRequiredMixin):
+class ProjectMemberAddView(FormView, SingleObjectMixin, LoginRequiredMixin):
     form_class = AddMemberForm
     model = Project
     template_name = 'project/project_member_add_form.html'
@@ -121,7 +119,7 @@ class ProjectMemberAddView(FormView, SingleObjectMixin, PermissionRequiredMixin)
         return super().post(request, *args, **kwargs)
 
 
-class ProjectMemberDeleteView(DeleteView, PermissionRequiredMixin):
+class ProjectMemberDeleteView(DeleteView, LoginRequiredMixin):
     model = Project
     template_name = 'project/project_member_confirm_remove.html'
     permission_required = 'change_project'
@@ -145,7 +143,7 @@ class ProjectMemberDeleteView(DeleteView, PermissionRequiredMixin):
         return context
 
 
-class MilestoneCreateView(PermissionRequiredMixin, CreateView):
+class MilestoneCreateView(LoginRequiredMixin, CreateView):
     model = Milestone
     form_class = MilestoneForm
     template_name_suffix = '_create_form'
@@ -164,7 +162,7 @@ class MilestoneCreateView(PermissionRequiredMixin, CreateView):
         return Project.objects.get(pk=self.kwargs['pk'])
 
 
-class MilestoneUpdateView(PermissionRequiredMixin, UpdateView):
+class MilestoneUpdateView(LoginRequiredMixin, UpdateView):
     model = Milestone
     form_class = MilestoneForm
     template_name_suffix = '_update_form'
@@ -172,7 +170,7 @@ class MilestoneUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_milestone'
 
 
-class MilestoneDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+class MilestoneDeleteView(LoginRequiredMixin, DeleteViewWithPermissions):
     model = Milestone
     context_object_name = 'milestone'
     permission_required = 'delete_milestone'
@@ -192,7 +190,7 @@ class MilestoneDetailView(DetailView):
     context_object_name = 'milestone'
 
 
-class IssueCreateView(PermissionRequiredMixin, CreateView):
+class IssueCreateView(LoginRequiredMixin, CreateView):
     model = Issue
     form_class = IssueForm
     template_name_suffix = '_create_form'
@@ -211,7 +209,7 @@ class IssueCreateView(PermissionRequiredMixin, CreateView):
         return Project.objects.get(pk=self.kwargs['pk'])
 
 
-class IssueUpdateView(PermissionRequiredMixin, UpdateView):
+class IssueUpdateView(LoginRequiredMixin, UpdateView):
     model = Issue
     form_class = IssueForm
     template_name_suffix = '_update_form'
@@ -219,7 +217,7 @@ class IssueUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_issue'
 
 
-class IssueDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+class IssueDeleteView(LoginRequiredMixin, DeleteViewWithPermissions):
     model = Issue
     context_object_name = 'issue'
     permission_required = 'delete_issue'
@@ -239,7 +237,7 @@ class IssueDetailView(DetailView):
     context_object_name = 'issue'
 
 
-class LabelCreateView(PermissionRequiredMixin, CreateView):
+class LabelCreateView(LoginRequiredMixin, CreateView):
     model = Label
     form_class = LabelForm
     template_name_suffix = '_create_form'
@@ -258,7 +256,7 @@ class LabelCreateView(PermissionRequiredMixin, CreateView):
         return Project.objects.get(pk=self.kwargs['pk'])
 
 
-class LabelUpdateView(PermissionRequiredMixin, UpdateView):
+class LabelUpdateView(LoginRequiredMixin, UpdateView):
     model = Label
     form_class = LabelForm
     template_name_suffix = '_update_form'
@@ -266,7 +264,7 @@ class LabelUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'change_label'
 
 
-class LabelDeleteView(PermissionRequiredMixin, DeleteViewWithPermissions):
+class LabelDeleteView(LoginRequiredMixin, DeleteViewWithPermissions):
     model = Label
     context_object_name = 'label'
     permission_required = 'delete_label'
