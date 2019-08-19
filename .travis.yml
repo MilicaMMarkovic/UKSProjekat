@@ -16,6 +16,7 @@ branches:
 before_install:
 - sudo docker --version
 - sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+- sudo openssl aes-256-cbc -K $encrypted_83630750896a_key -iv $encrypted_83630750896a_iv -in deploy_key.enc -out ./deploy_key -d
 - sudo docker build -t $DOCKER_USERNAME/uks-projekat:proba .
 - sudo docker images
 install:
