@@ -5,7 +5,10 @@ python:
 services:
 - docker
 #- postgresql
-#addons:
+addons:
+  apt:
+    packages:
+    - sshpass
 #  postgresql: '10'
 #  apt:
 #    packages:
