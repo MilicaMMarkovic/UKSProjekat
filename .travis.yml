@@ -9,11 +9,6 @@ addons:
   apt:
     packages:
     - sshpass
-#  postgresql: '10'
-#  apt:
-#    packages:
-#    - postgresql-10
-#dist: trusty
 branches:
 - master
 before_install:
@@ -38,7 +33,7 @@ deploy:
   provider: script
   skip_cleanup: true
   script: 
-  - sudo docker tag web "$DOCKER_USERNAME"/uks-projekat:production &&
+  - sudo docker tag $DOCKER_USERNAME/uks-projekat:latest "$DOCKER_USERNAME"/uks-projekat:production &&
     docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
