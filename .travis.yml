@@ -34,7 +34,7 @@ deploy:
   skip_cleanup: true
   script: 
   - sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-  - sudo docker tag uksprojekat_web "$DOCKER_USERNAME"/uks-projekat:production
+  #- sudo docker tag uksprojekat_web "$DOCKER_USERNAME"/uks-projekat:production
   - sudo docker push $DOCKER_USERNAME/uks-projekat:production
   on:
     branch: master
