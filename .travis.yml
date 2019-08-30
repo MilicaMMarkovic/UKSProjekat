@@ -26,17 +26,16 @@ script:
 - sudo docker-compose run web python manage.py migrate
 - sudo docker-compose run web python manage.py test
 after_success:
-
 - sudo docker push $DOCKER_USERNAME/uks-projekat:proba
 
-deploy:
-  provider: script
-  skip_cleanup: true
-  script: 
+#deploy:
+#  provider: script
+#  skip_cleanup: true
+#  script: 
   #- sudo docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
-  - docker tag uksprojekat_web $DOCKER_USERNAME/uks-projekat:production && docker push $DOCKER_USERNAME/uks-projekat:production
-  on:
-    branch: master
+#  - docker tag uksprojekat_web $DOCKER_USERNAME/uks-projekat:production && docker push $DOCKER_USERNAME/uks-projekat:production
+#  on:
+#    branch: master
 env:
   global:
   - PGPORT=5432
