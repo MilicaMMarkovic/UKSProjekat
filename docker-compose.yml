@@ -4,6 +4,8 @@ services:
   db:
     container_name: db
     image: postgres
+    volumes:
+     - ./database:/var/lib/postgresql/data
     restart: always
 
   web:
